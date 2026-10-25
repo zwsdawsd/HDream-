@@ -1,0 +1,62 @@
+{
+  "name": "hdream",
+  "productName": "HDream",
+  "version": "0.0.24",
+  "description": "HDream — 本地 Agent 工作台",
+  "main": "electron/main.mjs",
+  "type": "commonjs",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "serve": "node server.mjs",
+    "icon": "electron tools/make-brand.cjs",
+    "mock": "node tools/mock-llm.cjs",
+    "package": "node tools/make-portable.mjs",
+    "shortcut": "powershell -NoProfile -ExecutionPolicy Bypass -File install-shortcut.ps1",
+    "release": "node tools/make-release.mjs .",
+    "publish": "node tools/publish-release.mjs",
+    "installer": "electron-builder --win nsis --publish never"
+  },
+  "author": "HDream",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^45.0.0",
+    "rcedit": "^5.0.2"
+  },
+  "build": {
+    "appId": "com.hdream.workbench",
+    "productName": "HDream",
+    "copyright": "Copyright © 2026 HDream",
+    "electronDist": "node_modules/electron/dist",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "electron/**",
+      "public/**",
+      "*.mjs",
+      "package.json"
+    ],
+    "asar": false,
+    "win": {
+      "icon": "public/hdream.ico",
+      "target": [
+        "nsis"
+      ],
+      "artifactName": "HDream-Setup-v${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "HDream",
+      "installerIcon": "public/hdream.ico",
+      "uninstallerIcon": "public/hdream.ico",
+      "installerHeaderIcon": "public/hdream.ico",
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}
