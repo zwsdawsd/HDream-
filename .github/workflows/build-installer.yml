@@ -1,0 +1,36 @@
+﻿name: build-installer
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: '版本号（留空则用 package.json 里的）'
+        required: false
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 安装依赖
+        run: npm install --no-audit --no-fund
+
+      - name: 打包 NSIS 安装程序（不发布）
+        run: npx electron-builder --win nsis --publish never
+
+      - name: 列出产物
+        run: dir release
+
+      - name: 上传安装包（作为 Actions 产物，不建 Release）
+        uses: actions/upload-artifact@v4
+        with:
+          name: HDream-installer
+          path: |
+            release/HDream-Setup-*.exe
+            release/HDream-Setup-*.exe.blockmap
+          if-no-files-found: error
