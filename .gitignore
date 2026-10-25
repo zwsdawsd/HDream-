@@ -1,0 +1,9 @@
+﻿node_modules/
+release/
+dist/
+workspace/
+analyze/
+*.log
+config.json
+config.json.bak
+.profile/
