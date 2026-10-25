@@ -21,7 +21,8 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^45.0.0",
-    "rcedit": "^5.0.2"
+    "rcedit": "^5.0.2",
+    "electron-builder": "^26.0.0"
   },
   "build": {
     "appId": "com.hdream.workbench",
