@@ -1,0 +1,111 @@
+﻿<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>HDream</title>
+<link rel="icon" href="/agent.png">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body class="frameless">
+<div class="bg" aria-hidden="true"></div>
+
+<!-- 无边框窗口：自绘标题栏（可拖动）+ 窗口按钮 -->
+<header class="titlebar">
+  <div class="tb-left"></div>
+  <div class="tb-right">
+    <button class="tb-btn" id="winMin" type="button" title="最小化"><span></span></button>
+    <button class="tb-btn" id="winMax" type="button" title="最大化"><span></span></button>
+    <button class="tb-btn danger" id="winClose" type="button" title="关闭"><span></span></button>
+  </div>
+</header>
+
+<!-- 八向缩放把手（无边框窗口自己做） -->
+<div class="rz n"  data-dir="n"></div>
+<div class="rz s"  data-dir="s"></div>
+<div class="rz w"  data-dir="w"></div>
+<div class="rz e"  data-dir="e"></div>
+<div class="rz nw" data-dir="nw"></div>
+<div class="rz ne" data-dir="ne"></div>
+<div class="rz sw" data-dir="sw"></div>
+<div class="rz se" data-dir="se"></div>
+
+<div class="app">
+  <!-- ============================ 侧栏 ============================ -->
+  <aside class="side" id="side">
+    <div class="brand">
+      <img class="brand-word" src="/wordmark.png" alt="HDream">
+    </div>
+
+    <nav class="rows" id="rows"></nav>
+
+    <div class="side-foot">
+      <button class="row account" id="accountRow" type="button" aria-haspopup="menu">
+        <span class="row-ico acct" aria-hidden="true"></span>
+        <span class="row-label" id="accountLabel">账户</span>
+        <!-- 有新版本时在账户右侧显示蓝色提示，点它打开更新说明 -->
+        <span class="acct-badge" id="updateBadge" hidden></span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </button>
+    </div>
+    <div class="acct-menu" id="accountMenu" role="menu" hidden></div>
+  </aside>
+
+  <!-- ============================ 主区 ============================ -->
+  <main class="main">
+    <header class="top">
+      <button class="icon-btn" id="toggleSide" type="button" title="收起/展开侧栏">☰</button>
+      <div class="crumb" id="crumb">工作区</div>
+      <div class="top-right">
+        <button class="ghost-btn" id="backBtn" type="button" hidden>返回工作台</button>
+      </div>
+    </header>
+
+    <section class="stream" id="stream" aria-live="polite"></section>
+
+    <div class="scope-bar" id="scopeBar" hidden></div>
+
+    <footer class="composer">
+      <div class="composer-box">
+        <textarea id="input" rows="1" placeholder="给 agent 派个活…（Enter 发送，Shift+Enter 换行）"></textarea>
+        <div class="composer-bar">
+          <button class="model-row" id="modelRow" type="button">
+            <span class="model-label" id="modelLabel">未配置模型</span>
+            <span class="model-effort" id="effortLabel">Default</span>
+            <span class="chev" aria-hidden="true">⌄</span>
+          </button>
+          <button class="send" id="send" type="button" title="发送">↑</button>
+        </div>
+      </div>
+
+      <!-- ===================== 模型 / 思考强度卡片 ===================== -->
+      <div class="card" id="card" hidden>
+        <div class="card-head" id="cardHead">
+          <div class="card-head-left">
+            <span class="whale" id="whale" aria-hidden="true"></span>
+            <span class="card-title" id="cardModel">未配置模型</span>
+          </div>
+          <span class="chev" aria-hidden="true">⌄</span>
+        </div>
+
+        <div class="card-level">
+          <span class="level-name" id="levelName">Default</span>
+          <span class="level-arrow" aria-hidden="true">⌄</span>
+        </div>
+
+        <div class="track" id="track">
+          <div class="fill" id="fill"></div>
+          <div class="rail" id="rail"></div>
+          <div class="knob" id="knob"></div>
+        </div>
+
+        <div class="models" id="models" hidden></div>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>
